@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import com.jori.dwai.characters.Jori;
 import com.jori.dwai.util.Logger;
 import com.jori.dwai.util.MapReader;
 import com.jori.dwai.util.MapReader.LANDTYPE;
@@ -29,6 +30,7 @@ public class TestLevel extends BaseState{
 	public void render(GameContainer gc, StateBasedGame s, Graphics g) throws SlickException {
 		super.render(gc, s, g);
 		Tile[][] tiledMap = super.getTiledMap();
+		
 		for (int i = 0; i < tiledMap.length; i++) {
 			for (int j = 0; j < tiledMap.length; j++) {
 				Logger.log(super.getGrassImage()+"", "tiledMapTest");
@@ -50,13 +52,15 @@ public class TestLevel extends BaseState{
 				
 			}
 		}
-		
+		Jori.getInstance().render(g);
+
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame s, int delta)
 			throws SlickException {
 		super.update(gc, s, delta);
+		Jori.getInstance().update(gc.getInput(), super.getTiledMap(), delta);
 		
 	}
 
