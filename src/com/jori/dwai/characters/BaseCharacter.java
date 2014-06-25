@@ -16,12 +16,10 @@ public abstract class BaseCharacter {
 		p = new Point(32,32);
 	}
 	
-	public void moveTo(Point p){
-		//TODO: Check if the point is out of bounds.
+
+	public void setP(Point p){
 		this.p = p;
 	}
-	
-	
 	public Point getP() {
 		return p;
 	}

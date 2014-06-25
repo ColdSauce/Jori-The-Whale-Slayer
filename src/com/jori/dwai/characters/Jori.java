@@ -42,50 +42,51 @@ public class Jori extends BaseCharacter {
 		int x = p.getX() / 32;
 		int y = p.getY() / 32;
 
-		if (p.distanceTo(super.getP()) <= 32) {
+		//if (p.distanceTo(super.getP()) <= 32) {
 
 			Tile workingTile = tiledMap[x][y];
 			if (workingTile.isSolid()) {
 				return;
 			}
 
-			super.moveTo(p);
+			super.setP(p);
 
-		}
+		//}
 
 	}
 
 	public void render(Graphics g){
 		
-	g.drawImage(super.getImage(), super.getP().getX(), super.getP().getY());	
+		g.drawImage(super.getImage(), super.getP().getX(), super.getP().getY());	
 		
 	}
 	
 	public void update(Input i, Tile[][] tiledMap, int delta) {
+		Point p = super.getP();
 		if (i.isKeyDown(Input.KEY_LEFT)) {
 
-			Point p = new Point((int)(super.getP().getX() - (speed*(delta/1000.0))), super.getP().getY());
+			p.setX((int)(p.getX()-(speed*(delta/1000.0))));
 
 			move(p, tiledMap);
 
 		}
 
-		else if (i.isKeyPressed(Input.KEY_UP)) {
-
-			Point p = new Point(super.getP().getX(), super.getP().getY()-32);
+		 if (i.isKeyDown(Input.KEY_UP)) {
+			p.setY((int)(p.getY()-(speed*(delta/1000.0))));
+			move(p, tiledMap);
+		}  
+		 
+		if (i.isKeyDown(Input.KEY_DOWN)) {
+			p.setY((int)(p.getY()+(speed*(delta/1000.0))));
 
 			move(p, tiledMap);
-		} else if (i.isKeyPressed(Input.KEY_DOWN)) {
-			Point p = new Point(super.getP().getX() , super.getP().getY()+32);
+		}  
+		if (i.isKeyDown(Input.KEY_RIGHT)) {
+			p.setX((int)(p.getX()+(speed*(delta/1000.0))));
 
 			move(p, tiledMap);
-		} else if (i.isKeyPressed(Input.KEY_RIGHT)) {
-			Point p = new Point(super.getP().getX() + 32, super.getP().getY());
-
-			move(p, tiledMap);
-		
-
 	}
+		 
 
 }
 }
