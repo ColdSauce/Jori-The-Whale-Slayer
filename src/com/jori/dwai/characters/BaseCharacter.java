@@ -6,27 +6,26 @@ import com.jori.dwai.util.Point;
 
 public abstract class BaseCharacter {
 	
-	private int x,y;
+
+	private Point p;
 	protected Image img;
 	
 	
 	public BaseCharacter(Image img){
 		this.img = img;
+		p = new Point(32,32);
 	}
 	
 	public void moveTo(Point p){
 		//TODO: Check if the point is out of bounds.
-		x = p.getX();
-		y = p.getY();
+		this.p = p;
 	}
 	
 	
-	public int getX() {
-		return x;
+	public Point getP() {
+		return p;
 	}
-	public int getY() {
-		return y;
-	}
+
 	public Image getImage(){
 		return img;
 	}
