@@ -13,8 +13,7 @@ public class Jori extends BaseCharacter{
 	private Jori(Image img) {
 		super(img);
 	}
-	
-	
+	 
 	
 	
 	//SINGLETON PATTERN

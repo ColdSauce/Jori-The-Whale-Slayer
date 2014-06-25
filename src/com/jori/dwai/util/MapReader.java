@@ -36,7 +36,6 @@ public class MapReader {
 		try{
 			paintImage = loadImage(file);
 		}catch(Exception e){
-		
 			Logger.logErr("Was not able to read image located at " + file.getAbsolutePath() + "\n Cause: " + e.getCause(),MapReader.class);
 		}
 		Tile[][] tileMap = new Tile[paintImage.getHeight()][paintImage.getWidth()];

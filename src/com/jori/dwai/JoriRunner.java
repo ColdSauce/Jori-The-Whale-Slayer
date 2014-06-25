@@ -27,8 +27,7 @@ public class JoriRunner extends StateBasedGame {
 	}
 
 	public static void main(String[] args) throws SlickException {
-		AppGameContainer thing = new AppGameContainer(new JoriRunner(
-				"Jori The Whale Slayer!"));
+		AppGameContainer thing = new AppGameContainer(new JoriRunner("Jori The Whale Slayer!"));
 		thing.setDisplayMode(1280, 768, false);
 		thing.start();
 	}

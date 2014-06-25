@@ -5,8 +5,7 @@ public class Logger {
 	
 	//Put tags you want to be shown here
 	//Such as "Menu".
-	
-	private static final String[] TAGS = {"tiledMapTest"};
+	private static final String[] TAGS = {"menuScreen"};
 	public static void log(String whatToLog, String tag){
 		if(!DEBUG_MODE){
 			return;

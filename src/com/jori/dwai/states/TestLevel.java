@@ -15,7 +15,6 @@ public class TestLevel extends BaseState{
 	
 	public TestLevel(int state, String fileName) {
 		super(state, fileName);
-
 	}
 
 	@Override
@@ -59,7 +58,4 @@ public class TestLevel extends BaseState{
 		super.update(gc, s, delta);
 		
 	}
-
-
-	
 }
