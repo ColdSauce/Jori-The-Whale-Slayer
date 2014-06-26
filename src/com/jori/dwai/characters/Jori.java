@@ -3,18 +3,20 @@ package com.jori.dwai.characters;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
 
+import com.jori.dwai.characters.characterstates.BaseState;
+import com.jori.dwai.characters.characterstates.JumpingState;
+import com.jori.dwai.characters.characterstates.WalkingState;
+import com.jori.dwai.util.DIRECTION;
 import com.jori.dwai.util.Logger;
 import com.jori.dwai.util.Point;
-import com.jori.dwai.util.Tile;
 
 // Jori's x and y is in the tiled system. Such as 1 2 3 instead of 0 32 64
-public class Jori extends BaseCharacter {
-
-	private double speed = .01;
-	private Jori(Image img) {
-		super(img);
+public class Jori extends MovableCharacter{
+	private BaseState<Jori> currentState;
+	
+	private Jori(Image[] frames) {
+		super(frames,new Point(32,32));
 	}
 
 	//SINGLETON PATTERN
@@ -27,7 +29,9 @@ public class Jori extends BaseCharacter {
 				
 				Image img = new Image("res/characters/jori.png");
 				Logger.log(img+"","jori image");
-				instance = new Jori(img);
+				//TODO: Get jori to make frames
+				Image[] frames = {img};
+				instance = new Jori(frames);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -36,57 +40,65 @@ public class Jori extends BaseCharacter {
 		}
 		return instance;
 	}
+	
 
-	public void move(Point p, Tile[][] tiledMap) {
-
-		int x = p.getX() / 32;
-		int y = p.getY() / 32;
-
-		//if (p.distanceTo(super.getP()) <= 32) {
-
-			Tile workingTile = tiledMap[x][y];
-			if (workingTile.isSolid()) {
-				return;
-			}
-
-			super.setP(p);
-
-		//}
-
-	}
-
-	public void render(Graphics g){
+	@Override
+	public void update(Input input, int delta) {
+		if(input.isKeyPressed(Input.KEY_SPACE)){
+			setCurrentState(new JumpingState<Jori>());
+		}
+		else if(input.isKeyPressed(Input.KEY_LEFT)){
+			setCurrentState(new WalkingState<Jori>());
+			setDirection(DIRECTION.LEFT);
+		}
+		else if(input.isKeyPressed(Input.KEY_RIGHT)){
+			setCurrentState(new WalkingState<Jori>());
+			setDirection(DIRECTION.RIGHT);
+		}
+		else if(input.isKeyPressed(Input.KEY_UP)){
+			setCurrentState(new WalkingState<Jori>());
+			setDirection(DIRECTION.UP);
+		}
+		else if(input.isKeyPressed(Input.KEY_DOWN)){
+			setCurrentState(new WalkingState<Jori>());
+			setDirection(DIRECTION.DOWN);
+		}
 		
-		g.drawImage(super.getImage(), super.getP().getX(), super.getP().getY());	
-		
+		currentState.update(this);
+
 	}
 	
-	public void update(Input i, Tile[][] tiledMap, int delta) {
-		Point p = super.getP();
-		if (i.isKeyDown(Input.KEY_LEFT)) {
-
-			p.setX((int)(p.getX()-(speed*(delta/1000.0))));
-
-			move(p, tiledMap);
-
-		}
-
-		 if (i.isKeyDown(Input.KEY_UP)) {
-			p.setY((int)(p.getY()-(speed*(delta/1000.0))));
-			move(p, tiledMap);
-		}  
-		 
-		if (i.isKeyDown(Input.KEY_DOWN)) {
-			p.setY((int)(p.getY()+(speed*(delta/1000.0))));
-
-			move(p, tiledMap);
-		}  
-		if (i.isKeyDown(Input.KEY_RIGHT)) {
-			p.setX((int)(p.getX()+(speed*(delta/1000.0))));
-
-			move(p, tiledMap);
+	@Override
+	public void render(Graphics g){
+		super.render(g);
+		
 	}
-		 
 
-}
+	@Override
+	public Image getStandingImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Image getJumpingImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Image getRunningImage(DIRECTION dir) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void move(DIRECTION dir) {
+		
+		
+	}
+	public void setCurrentState(BaseState<Jori> state){
+		this.currentState = state;
+	}
 }

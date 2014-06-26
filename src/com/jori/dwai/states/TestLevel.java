@@ -12,7 +12,7 @@ import com.jori.dwai.util.MapReader.LANDTYPE;
 import com.jori.dwai.util.Tile;
 
 
-public class TestLevel extends BaseState{
+public class TestLevel extends BaseLevel{
 	
 	public TestLevel(int state, String fileName) {
 		super(state, fileName);
@@ -59,7 +59,7 @@ public class TestLevel extends BaseState{
 	public void update(GameContainer gc, StateBasedGame s, int delta)
 			throws SlickException {
 		super.update(gc, s, delta);
-		Jori.getInstance().update(gc.getInput(), super.getTiledMap(), delta);
+		Jori.getInstance().update(gc.getInput(), delta);
 		
 	}
 }

@@ -13,13 +13,13 @@ import com.jori.dwai.util.Logger;
 import com.jori.dwai.util.MapReader;
 import com.jori.dwai.util.Tile;
 
-public abstract class BaseState extends BasicGameState {
+public abstract class BaseLevel extends BasicGameState {
 	protected  int state;
 	protected  File imageFile;
 	private Tile[][] tiledMap;
 	private Image grassBlock;
 	private Image wallBlock;
-	public BaseState(int state,String fileName){
+	public BaseLevel(int state,String fileName){
 		File f = new File("maps/" + fileName);
 		imageFile = f;
 		this.state = state;
